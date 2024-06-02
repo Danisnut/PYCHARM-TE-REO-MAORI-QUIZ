@@ -1,6 +1,7 @@
 # Previous codes would not print.
 # This was due to a problem with the 'load_highscore' function
-# The previous code also assumed that my exported data into the highscore.txt file was arranged in a single string
+# The previous code also assumed that my exported data,
+# into the highscore.txt file was arranged in a single string
 # Also fixed up some of the 'quick fixes' & spelling
 
 import tkinter as tk

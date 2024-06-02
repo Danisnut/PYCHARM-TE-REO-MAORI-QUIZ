@@ -1,7 +1,5 @@
-# Previous codes would not print
-# Code would not work as well because it read,
-# info off of the .txt file, so when I deleted the info,
-# the code would not work.
+# Previous change did not let the test be centered.
+# Added centering
 
 import tkinter as tk
 from tkinter import messagebox, ttk, simpledialog
@@ -10,17 +8,19 @@ from data import data
 import json
 import os
 
+
 class HighscoreManager():
-    def __init__(self, filename='highscore.txt'):
+    def __init__(self, filename = 'highscore.txt'):
         self.filename = filename
         self.highscore = self.load_highscore()
 
     def load_highscore(self):
+        highscore = []
         if os.path.exists(self.filename):
             with open(self.filename, 'r') as file:
-                return json.load(file)
-        else:
-            return []
+                for line in file:
+                    highscore.append(json.loads(line.strip()))
+        return highscore
 
     def save_highscore(self):
         with open(self.filename, 'w') as file:
@@ -29,11 +29,13 @@ class HighscoreManager():
 
     def add_highscore(self, name, score):
         self.highscore.append({'name': name, 'score': score})
-        self.highscore = sorted(self.highscore, key=lambda x: x['score'], reverse=True)
+        self.highscore = sorted(self.highscore,
+                                key = lambda x: x['score'], reverse = True)
         self.save_highscore()
 
-    def get_highscore(self, limit=10):
+    def get_highscore(self, limit = 10):
         return self.highscore[:limit]
+
 
 highscore_manager = HighscoreManager()
 
@@ -49,10 +51,11 @@ def initialize_quiz():
     else:
         root.destroy()
 
+
 # Display Questions
 def show_question():
     question = data[current_question]
-    question_lbl.config(text=question["question"])
+    question_lbl.config(text = question["question"])
 
     # Display different questions
     choices = question["choices"]
@@ -61,6 +64,7 @@ def show_question():
 
     feedback.config(text="")
     next_button.config(state="disabled")
+
 
 # Check answer
 def check(choice):
@@ -74,12 +78,13 @@ def check(choice):
         feedback.config(text="Correct!", foreground="green")
     else:
         feedback.config(text="Incorrect!\n"
-                                   "The correct answer is:\n"
-                                   + question["answer"], foreground="red")
+                             "The correct answer is:\n"
+                             + question["answer"], foreground="red")
 
     for button in choice_button:
         button.config(state="disabled")
     next_button.config(state="normal")
+
 
 # Next question function
 def next_question():
@@ -90,11 +95,12 @@ def next_question():
         show_question()
     else:
         name = simpledialog.askstring("Quiz Completed",
-                         "Quiz Completed! Your final score is: {}/{}"
-                         "Enter your name: ".format(score, len(data)))
+                                      "Quiz Completed! Your final score is: {}/{}\n"
+                                      "Enter your name: ".format(score, len(data)))
         if name:
-            highscore_manager.add_highscore(name,score)
+            highscore_manager.add_highscore(name, score)
         root.destroy()
+
 
 # Create display
 root = tk.Tk()
@@ -103,8 +109,8 @@ root.geometry("600x500")
 style = Style(theme="flatly")
 
 # Font
-style.configure("Tlabel", font=("Times New Roman", 25))
-style.configure("Tbutton", font=("Times New Roman", 20))
+style.configure("label", font=("Times New Roman", 25))
+style.configure("button", font=("Times New Roman", 20))
 
 # Question Label
 question_lbl = ttk.Label(

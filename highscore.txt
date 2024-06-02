@@ -1,1 +1,8 @@
+{"name": "daniel", "score": 4}
+{"name": "DAniel", "score": 2}
+{"name": "Danispepee", "score": 2}
 {"name": "Dani", "score": 1}
+{"name": "Daniel", "score": 1}
+{"name": "Daniel", "score": 1}
+{"name": "Daniel 2", "score": 1}
+{"name": "Sigma", "score": 0}
