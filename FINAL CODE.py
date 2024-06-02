@@ -1,5 +1,3 @@
-# Added an 'Are you sure' popup.
-
 import tkinter as tk
 from tkinter import messagebox, ttk, simpledialog
 from ttkbootstrap import Style
